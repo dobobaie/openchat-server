@@ -13,7 +13,9 @@ const loggerMiddleware = require("./middlewares/logger");
 const parseAccessTokenMiddleware = require("./middlewares/parseAccessToken");
 const mustAccessMiddleware = require("./middlewares/mustAccess");
 
-module.exports = ({ config, gerJs, orm, logger }) => {
+const usersRoute = require("./routes/users");
+
+module.exports = ({ config, gerJs, orm, logger }, modules) => {
   const app = new Fireflyio({ allowedHttpRequests: true });
 
   app.extend(FireflyioRouter);
@@ -28,6 +30,7 @@ module.exports = ({ config, gerJs, orm, logger }) => {
   app.use(gerJs.middleware(app.router));
 
   app.router
+    .focus("/users", usersRoute(modules))
     .get("/swagger", mustAccessMiddleware(config.access_token), gerJs.expose())
     .get("/health")
     .get("/")
