@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const publicKey = fs.readFileSync(`${__dirname}/../pem/public.key`);
 
 module.exports = ({ orm }) => async (ctx, next) => {
-  console.log(ctx);
   const access_token = ctx.queries.access_token || ctx.headers.authorization;
   if (!access_token) {
     // eslint-disable-next-line

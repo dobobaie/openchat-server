@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc ava --serial --verbose",
-    "lint": "eslint .",
+    "lint": "eslint . --fix",
     "precommit": "lint-staged",
     "commitmsg": "commitlint -E GIT_PARAMS"
   },
