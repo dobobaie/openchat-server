@@ -1,4 +1,5 @@
 /* eslint-disable */
+const Promise = require('bluebird');
 
 let logger = type => event => console[type === "info" ? "log" : type](event);
 const perror = (type, error) => {
@@ -36,6 +37,12 @@ const knexpg = knex({
 const Orm = require('./orm');
 const orm = Orm({ knexpg });
 
+/*** Redis ***/
+const Redis = require('redis');
+Promise.promisifyAll(Redis.RedisClient.prototype);
+Promise.promisifyAll(Redis.Multi.prototype);
+const redis = Redis.createClient(config.redis_url);
+
 /*** GerJs ***/
 const modelsAPI = require("./models");
 const gerJs = require("gerjs-fireflyio")({
@@ -46,6 +53,7 @@ const gerJs = require("gerjs-fireflyio")({
 
 /*** Lib ***/
 const lib = {};
+lib.verifyAccessToken = require('./lib/verifyAccessToken');
 
 /*** App ***/
 const app = {
@@ -53,6 +61,8 @@ const app = {
   config,
   gerJs,
   orm,
+  redis,
+  socket: {},
   lib,
   logger
 };
