@@ -26,4 +26,12 @@ module.exports = function Users({ knexpg }) {
         deleted_at: null
       })
       .first();
+
+  this.verifyIfUserExistsByNickname = nickname =>
+    knexpg("users")
+      .where({
+        nickname,
+        deleted_at: null
+      })
+      .first();
 };
