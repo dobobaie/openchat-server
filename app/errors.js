@@ -15,5 +15,6 @@ module.exports = {
   validation_error_email_must_be_a_valid_email: "badData",
 
   user_email_already_exists: "badData",
-  user_does_not_exist: "badData"
+  user_does_not_exist: "badData",
+  user_nickname_already_exists: "badData"
 };

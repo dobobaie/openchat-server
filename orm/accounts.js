@@ -20,7 +20,7 @@ module.exports = function Accounts({ knexpg }) {
       })
       .first();
 
-  this.verifyIfAccountExistsByEmail = ({ email }) =>
+  this.verifyIfAccountExistsByEmail = email =>
     knexpg("accounts")
       .where({
         email,

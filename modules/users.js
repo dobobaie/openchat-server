@@ -6,11 +6,14 @@ const privateKey = fs.readFileSync(`${__dirname}/../pem/private.key`);
 
 module.exports = function Users({ config, orm }) {
   this.createUser = () => async ({ nickname, email, password }) => {
-    const verifyAccount = await orm.accounts.verifyIfAccountExistsByEmail({
-      email
-    });
+    const verifyAccount = await orm.accounts.verifyIfAccountExistsByEmail(email);
     if (verifyAccount) {
       throw new Error("user_email_already_exists");
+    }
+
+    const verifyNickname = await orm.users.verifyIfUserExistsByNickname(nickname);
+    if (verifyNickname) {
+      throw new Error("user_nickname_already_exists");
     }
 
     const salt_key = await bcrypt.genSalt(8);
