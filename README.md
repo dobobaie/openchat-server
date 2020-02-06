@@ -16,6 +16,7 @@ JSON format
   "SERVER_PORT": 5656,
   "LOCALE": "fr",
   "ACCESS_TOKEN": "___", // access token to access in a specific route (ex: DZedihfzfezfih)
+  "REDIS_URL": "___",
   "POSTGRES_URL": "___",
   "POSTGRES_DB": "___",
   "POSTGRES_USER": "___",
@@ -31,6 +32,7 @@ SERVER_IP=___
 SERVER_PORT=5656
 LOCALE=fr
 ACCESS_TOKEN=___
+REDIS_URL=___
 POSTGRES_URL=___
 POSTGRES_DB=___
 POSTGRES_USER=___

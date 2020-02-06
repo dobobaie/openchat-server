@@ -6,6 +6,7 @@ module.exports = env => {
     locale: env.LOCALE,
     access_token: env.ACCESS_TOKEN,
     rest_api_timeout: Number.parseInt(env.REST_API_TIMEOUT, 10) || 10000,
+    redis_url: env.REDIS_URL,
     postgres_url: env.POSTGRES_URL,
     postgres_db: env.POSTGRES_DB,
     postgres_user: env.POSTGRES_USER,
@@ -30,6 +31,7 @@ module.exports = env => {
       config.locale &&
       config.available_locales.indexOf(config.locale) !== -1 &&
       config.access_token &&
+      config.redis_url &&
       config.postgres_url &&
       config.postgres_db &&
       config.postgres_user &&
