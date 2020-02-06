@@ -12,8 +12,10 @@ const errorsMiddleware = require("./middlewares/errors");
 const loggerMiddleware = require("./middlewares/logger");
 const parseAccessTokenMiddleware = require("./middlewares/parseAccessToken");
 const mustAccessMiddleware = require("./middlewares/mustAccess");
+const mustAuthMiddleware = require("./middlewares/mustAuth");
 
 const usersRoute = require("./routes/users");
+const chatRoute = require("./routes/chat");
 
 module.exports = ({ config, gerJs, orm, logger }, modules) => {
   const app = new Fireflyio({ allowedHttpRequests: true });
@@ -31,6 +33,7 @@ module.exports = ({ config, gerJs, orm, logger }, modules) => {
 
   app.router
     .focus("/users", usersRoute(modules))
+    .focus("/chat", mustAuthMiddleware(), chatRoute(modules))
     .get("/swagger", mustAccessMiddleware(config.access_token), gerJs.expose())
     .get("/health")
     .get("/")
