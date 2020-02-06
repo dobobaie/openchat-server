@@ -15,7 +15,7 @@ module.exports = function Chat({ orm, redis, socket, lib }) {
     socket.$st.diffuse(
       "OPENCHAT_NEW_MESSAGE",
       lib.verifyAccessToken({ orm }),
-      entry
+      { entry }
     );
 
     const messages = JSON.parse(
