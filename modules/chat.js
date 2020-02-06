@@ -13,7 +13,7 @@ module.exports = function Chat({ orm, redis, socket, lib }) {
     };
 
     socket.$st.diffuse(
-      'OPENCHAT_NEW_MESSAGE',
+      "OPENCHAT_NEW_MESSAGE",
       lib.verifyAccessToken({ orm }),
       entry
     );
@@ -30,9 +30,6 @@ module.exports = function Chat({ orm, redis, socket, lib }) {
       total_messages
     );
 
-    redis.setAsync(
-      'OPENCHAT_MESSAGES',
-      JSON.stringify(messages_to_set)  
-    );
+    redis.setAsync("OPENCHAT_MESSAGES", JSON.stringify(messages_to_set));
   };
 };
