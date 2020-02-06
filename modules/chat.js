@@ -1,4 +1,5 @@
-const MAX_MESSAGES = 24;
+const MAX_MESSAGES = 50;
+const REMOVE_MESSAGES = 25;
 
 module.exports = function Chat({ orm, redis, socket, lib }) {
   this.newMessage = ({ authParams }) => async ({ message }) => {
@@ -24,11 +25,8 @@ module.exports = function Chat({ orm, redis, socket, lib }) {
     messages.push(entry);
 
     const total_messages = messages.length;
-    const allow_util_message = total_messages - MAX_MESSAGES;
-    const messages_to_set = messages.slice(
-      allow_util_message < 0 ? 0 : allow_util_message,
-      total_messages
-    );
+    const allow_util_message = total_messages - 2 >= MAX_MESSAGES ? REMOVE_MESSAGES : 0;
+    const messages_to_set = messages.slice(allow_util_message, total_messages);
 
     redis.setAsync("OPENCHAT_MESSAGES", JSON.stringify(messages_to_set));
   };
